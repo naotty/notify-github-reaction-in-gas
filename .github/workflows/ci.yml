@@ -14,12 +14,6 @@ on:
       - '.prettierrc.json'
       - 'jest.config.js'
       - 'appsscript.json'
-    paths-ignore:
-      - '**.md'
-      - 'docs/**'
-      - '.gitignore'
-      - '.vscode/**'
-      - 'LICENSE'
   pull_request:
     branches: [ main, develop ]
     paths:
@@ -33,12 +27,6 @@ on:
       - '.prettierrc.json'
       - 'jest.config.js'
       - 'appsscript.json'
-    paths-ignore:
-      - '**.md'
-      - 'docs/**'
-      - '.gitignore'
-      - '.vscode/**'
-      - 'LICENSE'
 
 jobs:
   ci:
