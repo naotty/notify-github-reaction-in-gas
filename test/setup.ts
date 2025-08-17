@@ -2,8 +2,8 @@
 (globalThis as any).UrlFetchApp = {
   fetch: jest.fn().mockReturnValue({
     getContentText: () => '{"ok": true}',
-    getResponseCode: () => 200
-  })
+    getResponseCode: () => 200,
+  }),
 };
 
 // Type declaration for TypeScript
