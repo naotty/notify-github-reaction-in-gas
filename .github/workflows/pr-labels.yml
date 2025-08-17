@@ -1,0 +1,38 @@
+name: Pull Request Labels
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  size-label:
+    runs-on: ubuntu-latest
+    name: Add size label
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Add size label
+      uses: actions/labeler@v5
+      with:
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+        configuration-path: .github/labeler.yml
+      continue-on-error: true
+  
+  check-conflicts:
+    runs-on: ubuntu-latest
+    name: Check for merge conflicts
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Check for merge conflicts
+      run: |
+        git fetch origin main
+        if git merge-tree $(git merge-base HEAD origin/main) origin/main HEAD | grep -q "<<<<<<< "; then
+          echo "::error::Merge conflicts detected. Please resolve conflicts before merging."
+          exit 1
+        fi
+      continue-on-error: true

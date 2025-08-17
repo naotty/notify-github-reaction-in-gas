@@ -1,0 +1,41 @@
+# ラベル自動付与設定
+
+documentation:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.md'
+      - 'docs/**'
+
+source-code:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'src/**/*.ts'
+      - 'src/**/*.js'
+
+tests:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'test/**'
+      - '**/*.test.ts'
+      - '**/*.spec.ts'
+
+dependencies:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'package.json'
+      - 'package-lock.json'
+
+github-actions:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.github/**'
+
+config:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'tsconfig.json'
+      - '.eslintrc.js'
+      - '.prettierrc.json'
+      - 'jest.config.js'
+      - '.clasp.json'
+      - 'appsscript.json'

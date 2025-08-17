@@ -1,0 +1,56 @@
+name: Deploy to Google Apps Script
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # 手動デプロイも可能にする
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+    
+    - name: Cache node_modules
+      uses: actions/cache@v4
+      id: cache-node-modules
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-modules-
+    
+    - name: Install dependencies
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: npm ci
+    
+    - name: Run tests before deploy
+      run: npm test
+    
+    - name: Build TypeScript
+      run: npm run build
+    
+    - name: Setup clasp credentials
+      run: |
+        echo '${{ secrets.CLASPRC_JSON }}' > ~/.clasprc.json
+        echo '${{ secrets.CLASP_JSON }}' > .clasp.json
+    
+    - name: Deploy to Google Apps Script
+      run: npm run push
+    
+    - name: Create deployment tag
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+        git tag -a "deploy-$TIMESTAMP" -m "Automated deployment at $TIMESTAMP"
+        git push origin "deploy-$TIMESTAMP"
+      continue-on-error: true
