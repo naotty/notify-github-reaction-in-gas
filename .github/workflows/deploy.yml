@@ -1,14 +1,18 @@
 name: Deploy to Google Apps Script
 
 on:
-  push:
-    branches: [ main ]
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+    branches:
+      - main
   workflow_dispatch:  # 手動デプロイも可能にする
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     
     steps:
     - uses: actions/checkout@v4
@@ -31,9 +35,6 @@ jobs:
     - name: Install dependencies
       if: steps.cache-node-modules.outputs.cache-hit != 'true'
       run: npm ci
-    
-    - name: Run tests before deploy
-      run: npm test
     
     - name: Build TypeScript
       run: npm run build

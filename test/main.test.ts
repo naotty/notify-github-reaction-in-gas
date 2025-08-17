@@ -48,7 +48,7 @@ describe("createSlackMessage", () => {
 
     expect(message.text).toBe("testuserさんがIssueに ❤️ リアクションしました");
     expect(message.attachments).toHaveLength(1);
-    expect(message.attachments[0].title).toBe("Test Issue");
-    expect(message.attachments[0].title_link).toBe("https://github.com/test/test/issues/1");
+    expect(message.attachments?.[0]?.title).toBe("Test Issue");
+    expect(message.attachments?.[0]?.title_link).toBe("https://github.com/test/test/issues/1");
   });
 });
