@@ -7,7 +7,7 @@ export function notifyToSlack(reactions: ProcessedReaction[], webhookUrl: string
   });
 }
 
-function createSlackMessage(reaction: ProcessedReaction): SlackMessage {
+export function createSlackMessage(reaction: ProcessedReaction): SlackMessage {
   const emoji = convertReactionToEmoji(reaction.content);
   const targetTypeLabel = getTargetTypeLabel(reaction.target_type);
 
@@ -37,7 +37,7 @@ function sendSlackMessage(webhookUrl: string, message: SlackMessage): void {
   });
 }
 
-function convertReactionToEmoji(reactionContent: string): string {
+export function convertReactionToEmoji(reactionContent: string): string {
   const emojiMap: Record<string, string> = {
     "+1": "👍",
     "-1": "👎",
@@ -52,7 +52,7 @@ function convertReactionToEmoji(reactionContent: string): string {
   return emojiMap[reactionContent] || reactionContent;
 }
 
-function getTargetTypeLabel(targetType: string): string {
+export function getTargetTypeLabel(targetType: string): string {
   const labels: Record<string, string> = {
     issue: "Issue",
     pull_request: "Pull Request",

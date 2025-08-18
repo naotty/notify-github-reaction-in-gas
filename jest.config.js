@@ -7,7 +7,8 @@ module.exports = {
     '^.+\\.ts$': ['ts-jest', {
       tsconfig: {
         types: ['jest'],
-        skipLibCheck: true
+        skipLibCheck: true,
+        esModuleInterop: true
       }
     }],
   },
