@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2019",
-    "module": "None",
+    "module": "none",
     "lib": ["ES2019"],
     "outDir": "./dist",
     "rootDir": "./src",

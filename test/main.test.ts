@@ -1,5 +1,20 @@
-import { convertReactionToEmoji, getTargetTypeLabel, createSlackMessage } from "../src/slack";
-import { ProcessedReaction } from "../src/types";
+// Test global functions after build
+import "../dist/slack";
+
+// Get functions from global
+const convertReactionToEmoji = (globalThis as any).convertReactionToEmoji;
+const getTargetTypeLabel = (globalThis as any).getTargetTypeLabel;
+const createSlackMessage = (globalThis as any).createSlackMessage;
+
+interface ProcessedReaction {
+  user: string;
+  content: string;
+  created_at: string;
+  target_type: "issue" | "pull_request" | "comment";
+  target_title: string;
+  target_url: string;
+  target_body: string;
+}
 
 describe("convertReactionToEmoji", () => {
   const testCases = [
