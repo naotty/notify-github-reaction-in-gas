@@ -61,3 +61,9 @@ export function getTargetTypeLabel(targetType: string): string {
 
   return labels[targetType] || targetType;
 }
+
+// Export for global access in GAS
+(globalThis as Record<string, unknown>).notifyToSlack = notifyToSlack;
+(globalThis as Record<string, unknown>).createSlackMessage = createSlackMessage;
+(globalThis as Record<string, unknown>).convertReactionToEmoji = convertReactionToEmoji;
+(globalThis as Record<string, unknown>).getTargetTypeLabel = getTargetTypeLabel;

@@ -1,4 +1,4 @@
-import { GitHubIssue, GitHubComment, GitHubReaction, ProcessedReaction } from "./types";
+import { ProcessedReaction, GitHubIssue, GitHubComment, GitHubReaction } from "./types";
 
 export function fetchNewReactions(githubToken: string, since: string): ProcessedReaction[] {
   const scriptProperties = PropertiesService.getScriptProperties();
@@ -131,3 +131,6 @@ function filterNewReactions(
       target_body: target.body,
     }));
 }
+
+// Export for global access in GAS
+(globalThis as Record<string, unknown>).fetchNewReactions = fetchNewReactions;

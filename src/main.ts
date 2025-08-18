@@ -20,7 +20,7 @@ function checkReactions(): void {
   }
 }
 
-export function getConfig(): Config {
+function getConfig(): Config {
   const scriptProperties = PropertiesService.getScriptProperties();
   return {
     githubToken: scriptProperties.getProperty("GITHUB_TOKEN") || "",
@@ -41,4 +41,5 @@ function setLastCheckedTime(time: string): void {
 }
 
 // Export for global access in GAS
-(globalThis as any).checkReactions = checkReactions;
+(globalThis as Record<string, unknown>).checkReactions = checkReactions;
+(globalThis as Record<string, unknown>).getConfig = getConfig;

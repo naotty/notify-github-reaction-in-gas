@@ -9,7 +9,7 @@ export interface GitHubIssue {
   title: string;
   body: string;
   user: GitHubUser;
-  pull_request?: any;
+  pull_request?: Record<string, unknown>;
   issue_url?: string;
 }
 
