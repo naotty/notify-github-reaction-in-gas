@@ -1,7 +1,3 @@
-import { Config } from "./types";
-import { fetchNewReactions } from "./github";
-import { notifyToSlack } from "./slack";
-
 function checkReactions(): void {
   const config = getConfig();
   const lastCheckedTime = getLastCheckedTime();

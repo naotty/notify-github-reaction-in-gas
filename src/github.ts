@@ -1,6 +1,4 @@
-import { ProcessedReaction, GitHubIssue, GitHubComment, GitHubReaction } from "./types";
-
-export function fetchNewReactions(githubToken: string, since: string): ProcessedReaction[] {
+function fetchNewReactions(githubToken: string, since: string): ProcessedReaction[] {
   const scriptProperties = PropertiesService.getScriptProperties();
   const username = scriptProperties.getProperty("GITHUB_USERNAME") || "";
   const reactions: ProcessedReaction[] = [];

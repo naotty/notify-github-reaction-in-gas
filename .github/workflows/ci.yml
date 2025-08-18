@@ -64,11 +64,11 @@ jobs:
     - name: Check TypeScript types
       run: npx tsc --noEmit
     
-    - name: Run tests
-      run: npm test
-    
     - name: Build TypeScript
       run: npm run build
+    
+    - name: Run tests
+      run: npm test
     
     - name: Run security audit
       run: |
