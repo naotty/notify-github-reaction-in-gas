@@ -1,4 +1,6 @@
-function notifyToSlack(reactions: ProcessedReaction[], webhookUrl: string): void {
+import { ProcessedReaction, SlackMessage } from "./types";
+
+export function notifyToSlack(reactions: ProcessedReaction[], webhookUrl: string): void {
   reactions.forEach((reaction) => {
     const message = createSlackMessage(reaction);
     sendSlackMessage(webhookUrl, message);
@@ -61,7 +63,7 @@ function getTargetTypeLabel(targetType: string): string {
 }
 
 // Export for global access in GAS
-(globalThis as any).notifyToSlack = notifyToSlack;
-(globalThis as any).createSlackMessage = createSlackMessage;
-(globalThis as any).convertReactionToEmoji = convertReactionToEmoji;
-(globalThis as any).getTargetTypeLabel = getTargetTypeLabel;
+(globalThis as Record<string, unknown>).notifyToSlack = notifyToSlack;
+(globalThis as Record<string, unknown>).createSlackMessage = createSlackMessage;
+(globalThis as Record<string, unknown>).convertReactionToEmoji = convertReactionToEmoji;
+(globalThis as Record<string, unknown>).getTargetTypeLabel = getTargetTypeLabel;

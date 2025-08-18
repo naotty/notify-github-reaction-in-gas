@@ -35,6 +35,6 @@ function deleteTriggers(): void {
 }
 
 // Export for global access in GAS
-(globalThis as any).setupScriptProperties = setupScriptProperties;
-(globalThis as any).createTimeTrigger = createTimeTrigger;
-(globalThis as any).deleteTriggers = deleteTriggers;
+(globalThis as Record<string, unknown>).setupScriptProperties = setupScriptProperties;
+(globalThis as Record<string, unknown>).createTimeTrigger = createTimeTrigger;
+(globalThis as Record<string, unknown>).deleteTriggers = deleteTriggers;
