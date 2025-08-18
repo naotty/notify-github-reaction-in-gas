@@ -1,9 +1,9 @@
 // GitHub API Types
-export interface GitHubUser {
+interface GitHubUser {
   login: string;
 }
 
-export interface GitHubIssue {
+interface GitHubIssue {
   url: string;
   html_url: string;
   title: string;
@@ -13,7 +13,7 @@ export interface GitHubIssue {
   issue_url?: string;
 }
 
-export interface GitHubComment {
+interface GitHubComment {
   url: string;
   html_url: string;
   body: string;
@@ -21,13 +21,13 @@ export interface GitHubComment {
   issue_url: string;
 }
 
-export interface GitHubReaction {
+interface GitHubReaction {
   user: GitHubUser;
   content: string;
   created_at: string;
 }
 
-export interface ProcessedReaction {
+interface ProcessedReaction {
   user: string;
   content: string;
   created_at: string;
@@ -38,7 +38,7 @@ export interface ProcessedReaction {
 }
 
 // Slack Types
-export interface SlackAttachment {
+interface SlackAttachment {
   color: string;
   title: string;
   title_link: string;
@@ -48,13 +48,13 @@ export interface SlackAttachment {
   ts: number;
 }
 
-export interface SlackMessage {
+interface SlackMessage {
   text: string;
   attachments: SlackAttachment[];
 }
 
 // Config Types
-export interface Config {
+interface Config {
   githubToken: string;
   slackWebhookUrl: string;
   githubUsername: string;

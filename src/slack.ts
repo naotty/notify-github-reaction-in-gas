@@ -1,13 +1,11 @@
-import { ProcessedReaction, SlackMessage } from "./types";
-
-export function notifyToSlack(reactions: ProcessedReaction[], webhookUrl: string): void {
+function notifyToSlack(reactions: ProcessedReaction[], webhookUrl: string): void {
   reactions.forEach((reaction) => {
     const message = createSlackMessage(reaction);
     sendSlackMessage(webhookUrl, message);
   });
 }
 
-export function createSlackMessage(reaction: ProcessedReaction): SlackMessage {
+function createSlackMessage(reaction: ProcessedReaction): SlackMessage {
   const emoji = convertReactionToEmoji(reaction.content);
   const targetTypeLabel = getTargetTypeLabel(reaction.target_type);
 
@@ -37,7 +35,7 @@ function sendSlackMessage(webhookUrl: string, message: SlackMessage): void {
   });
 }
 
-export function convertReactionToEmoji(reactionContent: string): string {
+function convertReactionToEmoji(reactionContent: string): string {
   const emojiMap: Record<string, string> = {
     "+1": "👍",
     "-1": "👎",
@@ -52,7 +50,7 @@ export function convertReactionToEmoji(reactionContent: string): string {
   return emojiMap[reactionContent] || reactionContent;
 }
 
-export function getTargetTypeLabel(targetType: string): string {
+function getTargetTypeLabel(targetType: string): string {
   const labels: Record<string, string> = {
     issue: "Issue",
     pull_request: "Pull Request",
@@ -61,3 +59,9 @@ export function getTargetTypeLabel(targetType: string): string {
 
   return labels[targetType] || targetType;
 }
+
+// Export for global access in GAS
+(globalThis as any).notifyToSlack = notifyToSlack;
+(globalThis as any).createSlackMessage = createSlackMessage;
+(globalThis as any).convertReactionToEmoji = convertReactionToEmoji;
+(globalThis as any).getTargetTypeLabel = getTargetTypeLabel;

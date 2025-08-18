@@ -1,7 +1,3 @@
-import { Config } from "./types";
-import { fetchNewReactions } from "./github";
-import { notifyToSlack } from "./slack";
-
 function checkReactions(): void {
   const config = getConfig();
   const lastCheckedTime = getLastCheckedTime();
@@ -20,7 +16,7 @@ function checkReactions(): void {
   }
 }
 
-export function getConfig(): Config {
+function getConfig(): Config {
   const scriptProperties = PropertiesService.getScriptProperties();
   return {
     githubToken: scriptProperties.getProperty("GITHUB_TOKEN") || "",
@@ -42,3 +38,4 @@ function setLastCheckedTime(time: string): void {
 
 // Export for global access in GAS
 (globalThis as any).checkReactions = checkReactions;
+(globalThis as any).getConfig = getConfig;
