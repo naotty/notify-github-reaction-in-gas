@@ -6,6 +6,9 @@ on:
 
 jobs:
   size-label:
+    permissions:
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
     name: Add size label
     
@@ -20,6 +23,8 @@ jobs:
       continue-on-error: true
   
   check-conflicts:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     name: Check for merge conflicts
     
